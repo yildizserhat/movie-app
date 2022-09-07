@@ -1,0 +1,24 @@
+springdoc:
+  swagger-ui:
+    path: /documentation
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: user
+    password: 12345
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      ddl-auto: none
+    generate-ddl: false
+    show-sql: true
+server:
+  port: 8080
+
+application:
+  client:
+    omdb-service:
+      url: localhost:9562
+      apiSecretKey: 999
+

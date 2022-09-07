@@ -1,7 +1,6 @@
 package com.yildiz.serhat.movieservice.controller;
 
 import com.yildiz.serhat.movieservice.domain.model.TopMoviesResponseModel;
-import com.yildiz.serhat.movieservice.repository.UserRepository;
 import com.yildiz.serhat.movieservice.service.RatingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,8 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "movie", description = "Endpoints about movie rating")
 public class RatingController {
-
-    private final UserRepository repository;
 
     private final RatingService ratingService;
 

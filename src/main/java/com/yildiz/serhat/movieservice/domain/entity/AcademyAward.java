@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Table(name = "academy_award")
-public class AcademyAward {
+public class AcademyAward extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

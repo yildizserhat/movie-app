@@ -12,6 +12,7 @@ import com.yildiz.serhat.movieservice.service.MovieService;
 import com.yildiz.serhat.movieservice.service.RatingService;
 import com.yildiz.serhat.movieservice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.Optional;
 import static com.yildiz.serhat.movieservice.domain.entity.Movie.createMovie;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class RatingServiceImpl implements RatingService {
 
@@ -39,14 +41,17 @@ public class RatingServiceImpl implements RatingService {
         if (!user.isPresent()) {
             throw new UserNotFoundException("User not found", HttpStatus.NOT_FOUND);
         }
+        log.info("Movie will be rated by user: {}, movie: {} and rate:{}", user.get(), movie, rate);
         Rating rating = Rating.buildRate(rate, user.get(), movie);
         ratingRepository.save(rating);
+        log.info("Rating is saved");
     }
 
     @Override
     public List<TopMoviesResponseModel> getTopTenRatedMoviesOrderByBoxOffice(String token) {
         Optional<User> userByToken = userService.findUserByToken(prepareToken(token));
         if (!userByToken.isPresent()) {
+            log.info("User not found to get top-ten-rated-movies");
             throw new UserNotFoundException("User not found", HttpStatus.NOT_FOUND);
         }
         return ratingRepository.getRatingByUserOrderByBoxOfficeValue(userByToken.get().getEmail(), getPagination());

@@ -10,7 +10,6 @@ import static java.util.Objects.nonNull;
 
 @Slf4j
 public class OmdbErrorDecoder implements ErrorDecoder {
-
     @Override
     public Exception decode(String methodKey, Response response) {
         try {
@@ -40,6 +39,4 @@ public class OmdbErrorDecoder implements ErrorDecoder {
             log.error(builder.toString());
         }
     }
-
-
 }

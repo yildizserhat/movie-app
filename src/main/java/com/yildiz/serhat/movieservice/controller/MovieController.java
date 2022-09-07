@@ -1,10 +1,10 @@
 package com.yildiz.serhat.movieservice.controller;
 
-import com.yildiz.serhat.movieservice.domain.model.ApiResponse;
 import com.yildiz.serhat.movieservice.service.MovieService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +23,9 @@ public class MovieController {
 
     @GetMapping("/best-picture/{title}")
     @Operation(summary = "Find best-picture movie based on omdb-api and csv file")
-    public ResponseEntity<ApiResponse> findBestPictureMovie(@PathVariable("title") String title) {
+    public ResponseEntity<?> findBestPictureMovie(@PathVariable("title") String title) {
         Optional<Boolean> movie = movieService.findBestPictureMovie(title);
-
-        if (!movie.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(ApiResponse.builder()
-                .success(true)
-                .message(title + " is Best Picture Movie")
-                .object(movie.get())
-                .build());
+        return movie.map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

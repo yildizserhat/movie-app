@@ -9,5 +9,4 @@ public interface MovieService {
     Optional<Boolean> findBestPictureMovie(String title);
 
     Movie saveMovieIfNotExist(Movie movie);
-
 }

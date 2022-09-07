@@ -6,7 +6,6 @@ import com.yildiz.serhat.movieservice.domain.model.UserResponseModel;
 import java.util.Optional;
 
 public interface UserService {
-
     UserResponseModel registerUser(String email);
 
     Optional<User> findUserByToken(String token);

@@ -12,11 +12,11 @@ import java.time.OffsetDateTime;
 @Getter
 public abstract class BaseEntity {
 
-    @Column(name = "created_date", updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "created_date", updatable = false)
     @CreationTimestamp
     private OffsetDateTime createdDate;
 
-    @Column(name = "updated_date", insertable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "updated_date", insertable = false)
     @UpdateTimestamp
     private OffsetDateTime updatedDate;
 }

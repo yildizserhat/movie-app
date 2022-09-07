@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(value = "omdb-service", url = "${application.client.omdb-service.url}", configuration = OmdbFeignClientConfig.class)
 public interface OmdbAPI {
-
     @GetMapping(path = "?apikey={apikey}&t={title}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    OmdbResponse getMovieInfo(@PathVariable String apikey,@PathVariable String title);
+    OmdbResponse getMovieInfo(@PathVariable String apikey, @PathVariable String title);
 }
 
